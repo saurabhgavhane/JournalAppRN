@@ -71,7 +71,8 @@ export default class DrawerLayout extends Component {
       itemStyle,
       navListContainer,
       imgStyle,
-      drawerLogoImgStyle
+      drawerLogoImgStyle,
+      drawerHoriBar
     } = styles;
 
     return (
@@ -86,11 +87,15 @@ export default class DrawerLayout extends Component {
           />
           <Text style={headerTextStyle}>{`Saurabh Gavhane`}</Text>
         </View>
+        <Image
+          style={drawerHoriBar}
+          source={require("../../images/drawer_bar.png")}
+        />
         <View style={navListContainer}>
           <TouchableHighlight underlayColor={"#ddd"}>
             <View style={itemStyle}>
               <Image
-                source={require("../../images/password.png")}
+                source={require("../../images/side_records.png")}
                 style={imgStyle}
               />
 
@@ -99,14 +104,31 @@ export default class DrawerLayout extends Component {
           </TouchableHighlight>
           <View style={itemStyle}>
             <Image
-              source={require("../../images/password.png")}
+              source={require("../../images/setting.png")}
               style={imgStyle}
             />
             <Text style={textStyle}>My Profile</Text>
           </View>
+
           <View style={itemStyle}>
             <Image
-              source={require("../../images/password.png")}
+              source={require("../../images/company.png")}
+              style={imgStyle}
+            />
+            <Text style={textStyle}>Company</Text>
+          </View>
+
+          <View style={itemStyle}>
+            <Image
+              source={require("../../images/side_password.png")}
+              style={imgStyle}
+            />
+            <Text style={textStyle}>Change Password</Text>
+          </View>
+
+          <View style={itemStyle}>
+            <Image
+              source={require("../../images/logout.png")}
               style={imgStyle}
             />
             <Text style={textStyle} onPress={() => this.showAlert()}>
@@ -127,10 +149,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flex: 2,
-    borderBottomColor: "#fff",
-    borderBottomWidth: 1,
     paddingLeft: 20,
-    paddingBottom: 10,
     justifyContent: "flex-end"
   },
   headerTextStyle: {
@@ -140,17 +159,16 @@ const styles = StyleSheet.create({
     marginEnd: 30
   },
   navListContainer: {
-    flex: 4,
-    marginTop: 20
+    flex: 4
   },
   itemStyle: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    padding: 10
+    paddingBottom: 25
   },
   textStyle: {
-    fontSize: 16,
+    fontSize: 22,
     color: "#fff",
     paddingLeft: 10
   },
@@ -171,6 +189,12 @@ const styles = StyleSheet.create({
     height: "50%",
     padding: 10,
     margin: 10,
+    resizeMode: "contain"
+  },
+  drawerHoriBar: {
+    flex: 1,
+    width: "100%",
+    height: "20%",
     resizeMode: "contain"
   }
 });
