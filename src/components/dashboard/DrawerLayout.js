@@ -6,13 +6,27 @@ import {
   Image,
   Alert,
   BackHandler,
-  ToastAndroid,
+  AsyncStorage,
   ImageBackground,
   TouchableHighlight
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 
 export default class DrawerLayout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: "" };
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem("Name")
+      .then(value => {
+        if (value) {
+          this.setState({ name: value });
+        }
+      })
+      .done();
+  }
   componentDidMount() {
     this.backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
       Alert.alert(
@@ -62,6 +76,11 @@ export default class DrawerLayout extends Component {
     );
   };
 
+  redirectToDashboard() {
+    Actions.drawerClose();
+    Actions.records();
+  }
+
   render() {
     const {
       container,
@@ -85,7 +104,7 @@ export default class DrawerLayout extends Component {
             source={require("../../images/logo.png")}
             style={drawerLogoImgStyle}
           />
-          <Text style={headerTextStyle}>{`Saurabh Gavhane`}</Text>
+          <Text style={headerTextStyle}>{this.state.name}</Text>
         </View>
         <Image
           style={drawerHoriBar}
@@ -99,7 +118,12 @@ export default class DrawerLayout extends Component {
                 style={imgStyle}
               />
 
-              <Text style={textStyle}>Records</Text>
+              <Text
+                style={textStyle}
+                onPress={() => this.redirectToDashboard()}
+              >
+                Records
+              </Text>
             </View>
           </TouchableHighlight>
           <View style={itemStyle}>

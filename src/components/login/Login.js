@@ -5,6 +5,7 @@ import {
   View,
   Text,
   Image,
+  ToastAndroid,
   TouchableOpacity,
   KeyboardAvoidingView
 } from "react-native";
@@ -59,25 +60,26 @@ class Login extends Component {
     }
   }
 
-  setDataInLocal(next) {
+  async setDataInLocal(next) {
     console.log("this.props.user", next);
-    AsyncStorage.setItem("Name", next.email);
-    AsyncStorage.setItem("Password", next.password);
-    AsyncStorage.setItem("Token", next.user.s);
+    // ToastAndroid.show(next.email, ToastAndroid.LONG);
+    await AsyncStorage.setItem("Name", next.email);
+    //ToastAndroid.show(next.password, ToastAndroid.LONG);
+    await AsyncStorage.setItem("Password", next.password);
+    //ToastAndroid.show(next.user.d, ToastAndroid.LONG);
+    await AsyncStorage.setItem("Token", next.user.d);
     Actions.main();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user != "" && nextProps.user != undefined) {
-      console.log("Test");
-      console.log("nextProps", nextProps.user);
       if (nextProps.user.s === true) {
-        console.log("Test True");
         this.setDataInLocal(nextProps);
       }
     } else {
       console.log("Blank");
     }
+    
 
     // nextProps.user
     //   ? this.setDataInLocal(JSON.stringify(nextProps))
