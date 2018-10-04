@@ -69,8 +69,10 @@ class DashBoard extends Component {
             data={this.state.recordList}
             renderItem={({ item }) => (
               <RecordListItem
-                serialNo={"Serial No:" + item.serialNo}
-                signerName={"Signer Name:" + item.signer[0].firstName}
+                serialNo={"Serial No: " + item.serialNo}
+                signerName={"Signer Name: " + item.signer[0].firstName}
+                createdDate={"Created Date: " + item.createdAt}
+                modifiedDate={"Modified Date: " + item.updatedAt}
               />
             )}
             keyExtractor={item => item.serialNo}
