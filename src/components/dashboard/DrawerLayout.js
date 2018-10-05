@@ -12,6 +12,8 @@ import {
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 
+
+
 export default class DrawerLayout extends Component {
   constructor(props) {
     super(props);
@@ -189,7 +191,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    paddingBottom: 25
+    paddingBottom: 25,
+    marginTop:5
   },
   textStyle: {
     fontSize: 22,

@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   itemStyle: {
     padding: 10,
     backgroundColor: "#FFF",
-    flex: 1
+    flex: 1,
+    marginTop:5
   }
 });

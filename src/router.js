@@ -7,19 +7,17 @@ import DrawerLayout from "./components/dashboard/DrawerLayout";
 const RouterComponent = () => (
   <Router>
     <Scene key="root" hideNavBar>
-      <Scene key="auth">
         <Scene key="login" component={Login} initial hideNavBar />
-      </Scene>
-
-      <Drawer
+     
+      {/* <Drawer
         key="main"
         contentComponent={DrawerLayout}
         drawerWidth={250}
         drawerPosition="left"
-      >
+      > */}
         <Scene key="records" component={Dashboard} hideNavBar />
         <Scene key="myProfile" component={Login} hideNavBar />
-      </Drawer>
+      {/* </Drawer> */}
     </Scene>
   </Router>
 );

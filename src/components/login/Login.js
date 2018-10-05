@@ -68,7 +68,7 @@ class Login extends Component {
     await AsyncStorage.setItem("Password", next.password);
     //ToastAndroid.show(next.user.d, ToastAndroid.LONG);
     await AsyncStorage.setItem("Token", next.user.d);
-    Actions.main();
+    Actions.records();
   }
 
   componentWillReceiveProps(nextProps) {
