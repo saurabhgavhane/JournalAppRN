@@ -6,13 +6,15 @@ import {
   Image,
   Alert,
   BackHandler,
+  TouchableOpacity,
   AsyncStorage,
+  ToastAndroid,
   ImageBackground,
   TouchableHighlight
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 
-
+import { RECORDS, PROFILE } from "../../utils/constants";
 
 export default class DrawerLayout extends Component {
   constructor(props) {
@@ -78,9 +80,16 @@ export default class DrawerLayout extends Component {
     );
   };
 
-  redirectToDashboard() {
-    Actions.drawerClose();
-    Actions.records();
+  openRecords() {
+    //ToastAndroid.show(RECORDS, ToastAndroid.SHORT);
+    this.props.drawerAction(RECORDS);
+    this.props.refer.close();
+  }
+
+  openProfile() {
+    //ToastAndroid.show(PROFILE, ToastAndroid.SHORT);
+    this.props.drawerAction(PROFILE);
+    this.props.refer.close();
   }
 
   render() {
@@ -113,54 +122,60 @@ export default class DrawerLayout extends Component {
           source={require("../../images/drawer_bar.png")}
         />
         <View style={navListContainer}>
-          <TouchableHighlight underlayColor={"#ddd"}>
+          <TouchableOpacity
+            underlayColor={"#ddd"}
+            onPress={() => this.openRecords()}
+          >
             <View style={itemStyle}>
               <Image
                 source={require("../../images/side_records.png")}
                 style={imgStyle}
               />
 
-              <Text
-                style={textStyle}
-                onPress={() => this.redirectToDashboard()}
-              >
-                Records
+              <Text style={textStyle}>Records</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            underlayColor={"#ddd"}
+            onPress={() => this.openProfile()}
+          >
+            <View style={itemStyle}>
+              <Image
+                source={require("../../images/setting.png")}
+                style={imgStyle}
+              />
+              <Text style={textStyle}>My Profile</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity underlayColor={"#ddd"}>
+            <View style={itemStyle}>
+              <Image
+                source={require("../../images/company.png")}
+                style={imgStyle}
+              />
+              <Text style={textStyle}>Company</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity underlayColor={"#ddd"}>
+            <View style={itemStyle}>
+              <Image
+                source={require("../../images/side_password.png")}
+                style={imgStyle}
+              />
+              <Text style={textStyle}>Change Password</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity underlayColor={"#ddd"}>
+            <View style={itemStyle}>
+              <Image
+                source={require("../../images/logout.png")}
+                style={imgStyle}
+              />
+              <Text style={textStyle} onPress={() => this.showAlert()}>
+                Logout
               </Text>
             </View>
-          </TouchableHighlight>
-          <View style={itemStyle}>
-            <Image
-              source={require("../../images/setting.png")}
-              style={imgStyle}
-            />
-            <Text style={textStyle}>My Profile</Text>
-          </View>
-
-          <View style={itemStyle}>
-            <Image
-              source={require("../../images/company.png")}
-              style={imgStyle}
-            />
-            <Text style={textStyle}>Company</Text>
-          </View>
-
-          <View style={itemStyle}>
-            <Image
-              source={require("../../images/side_password.png")}
-              style={imgStyle}
-            />
-            <Text style={textStyle}>Change Password</Text>
-          </View>
-
-          <View style={itemStyle}>
-            <Image
-              source={require("../../images/logout.png")}
-              style={imgStyle}
-            />
-            <Text style={textStyle} onPress={() => this.showAlert()}>
-              Logout
-            </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     );
@@ -192,7 +207,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     paddingBottom: 25,
-    marginTop:5
+    marginTop: 5
   },
   textStyle: {
     fontSize: 22,
