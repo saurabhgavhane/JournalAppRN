@@ -36,16 +36,26 @@ class DashBoard extends Component {
       selectedItem: RECORDS
     };
     // Bind the this context to the handler function
-    this.handler = this.handler.bind(this);
+    this.drawerClickHandler = this.drawerClickHandler.bind(this);
+
+    this.recordListItemClickHandler = this.recordListItemClickHandler.bind(
+      this
+    );
   }
 
   // This method will be sent to the child component
-  handler(selectedScreen) {
+  drawerClickHandler(selectedScreen) {
     // ToastAndroid.show(selectedScreen, ToastAndroid.SHORT);
     //console.log("selectedScreen", selectedScreen);
     this.setState({
       selectedItem: selectedScreen
     });
+  }
+
+  recordListItemClickHandler(item) {
+    Actions.editRecords();
+    ToastAndroid.show("recordListItemClickHandler", ToastAndroid.SHORT);
+    ToastAndroid.show(item.serialNo, ToastAndroid.SHORT);
   }
 
   componentWillMount() {
@@ -113,7 +123,7 @@ class DashBoard extends Component {
                 }
               }}
               style={[
-                styles.addImg,
+                styles.addImage,
                 {
                   alignself: "left",
                   marginLeft: 10,
@@ -161,6 +171,7 @@ class DashBoard extends Component {
                 data={this.state.recordList}
                 renderItem={({ item }) => (
                   <RecordListItem
+                    onPressItem={this.recordListItemClickHandler}
                     serialNo={"Serial No: " + item.serialNo}
                     signerName={"Signer Name: " + item.signer[0].firstName}
                     createdDate={"Created Date: " + item.createdAt}
@@ -188,7 +199,10 @@ class DashBoard extends Component {
         tapToClose={true}
         height={65}
         content={
-          <DrawerLayout drawerAction={this.handler} refer={this._drawer} />
+          <DrawerLayout
+            drawerAction={this.drawerClickHandler}
+            refer={this._drawer}
+          />
         }
       >
         {this.toolBar()}
@@ -215,6 +229,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFFFF"
   },
   addImage: {
+    padding: 10,
     resizeMode: "contain"
   },
   addImageView: {

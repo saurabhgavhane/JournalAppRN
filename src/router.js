@@ -2,6 +2,7 @@ import { Router, Scene, Drawer } from "react-native-router-flux";
 import React from "react";
 import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
+import EditRecords from "./components/RecordList/EditRecords";
 import DrawerLayout from "./components/dashboard/DrawerLayout";
 
 const RouterComponent = () => (
@@ -16,6 +17,7 @@ const RouterComponent = () => (
         drawerPosition="left"
       > */}
         <Scene key="records" component={Dashboard} hideNavBar />
+        <Scene key="editRecords" component={EditRecords} hideNavBar />
         <Scene key="myProfile" component={Login} hideNavBar />
       {/* </Drawer> */}
     </Scene>

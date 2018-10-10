@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 
 export default class RecordListItem extends React.PureComponent {
-  _onPress = () => {
-    // this.props.onPressItem(this.props.id);
-  };
+  onItemPress() {
+    this.props.onPressItem(this.props);
+  }
 
   render() {
     return (
-      <TouchableOpacity onPress={this._onPress}>
+      <TouchableOpacity onPress={() => this.onItemPress()}>
         <View style={styles.itemStyle}>
           <Text style={styles.boldtext}>{this.props.serialNo}</Text>
           <Text style={styles.boldtext}>{this.props.signerName}</Text>
@@ -42,6 +42,6 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#FFF",
     flex: 1,
-    marginTop:5
+    marginTop: 5
   }
 });

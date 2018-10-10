@@ -73,13 +73,14 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user != "" && nextProps.user != undefined) {
-      if (nextProps.user.s === true) {
+      if (nextProps.user.s) {
         this.setDataInLocal(nextProps);
+      } else {
+        ToastAndroid.show(nextProps.user.m, ToastAndroid.LONG);
       }
     } else {
       console.log("Blank");
     }
-    
 
     // nextProps.user
     //   ? this.setDataInLocal(JSON.stringify(nextProps))
