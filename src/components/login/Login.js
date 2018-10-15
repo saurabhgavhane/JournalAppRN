@@ -60,15 +60,18 @@ class Login extends Component {
     }
   }
 
-  async setDataInLocal(next) {
+  setDataInLocal(next) {
     console.log("this.props.user", next);
+    console.log("next.email", next.email);
     // ToastAndroid.show(next.email, ToastAndroid.LONG);
-    await AsyncStorage.setItem("Name", next.email);
+    AsyncStorage.setItem("Name", next.email);
     //ToastAndroid.show(next.password, ToastAndroid.LONG);
-    await AsyncStorage.setItem("Password", next.password);
+    console.log("next.password", next.password);
+    AsyncStorage.setItem("Password", next.password);
     //ToastAndroid.show(next.user.d, ToastAndroid.LONG);
-    await AsyncStorage.setItem("Token", next.user.d);
-    Actions.records();
+    console.log("next.user.d", next.user.d);
+    AsyncStorage.setItem("Token", next.user.d);
+    Actions.main();
   }
 
   componentWillReceiveProps(nextProps) {

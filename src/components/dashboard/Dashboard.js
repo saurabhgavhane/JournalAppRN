@@ -24,8 +24,9 @@ import { fetchRecords } from "../../actions";
 import addImg from "../.././images/add_white.png";
 import toolbarBgImg from "../.././images/header.png";
 import drawerMenuImg from "../.././images/drawer_menu.png";
+import { toolbarStyles } from "../../utils/styles";
 
-import { RECORDS, PROFILE } from "../../utils/constants";
+import { MAIN, RECORDS, PROFILE, EDIT_RECORDS } from "../../utils/constants";
 
 class DashBoard extends Component {
   constructor(props) {
@@ -54,14 +55,16 @@ class DashBoard extends Component {
 
   recordListItemClickHandler(item) {
     Actions.editRecords();
-    ToastAndroid.show("recordListItemClickHandler", ToastAndroid.SHORT);
-    ToastAndroid.show(item.serialNo, ToastAndroid.SHORT);
+    //ToastAndroid.show("recordListItemClickHandler", ToastAndroid.SHORT);
+    //ToastAndroid.show(item.serialNo, ToastAndroid.SHORT);
   }
 
   componentWillMount() {
+    console.log("componentWillMount");
     AsyncStorage.getItem("Token")
       .then(value => {
         if (value) {
+          console.log("value", value);
           this.setState({ token: value });
           this.makeRecordFetchRequest();
         }
@@ -98,7 +101,7 @@ class DashBoard extends Component {
   }
 
   makeRecordFetchRequest = () => {
-    //console.log("Record", this.state.token);
+    console.log("Record", this.state.token);
     this.props.fetchRecords(this.state.token);
   };
 
@@ -112,8 +115,11 @@ class DashBoard extends Component {
   toolBar() {
     return (
       <View style={styles.container}>
-        <View style={styles.toolbar}>
-          <ImageBackground style={styles.toolbarImage} source={toolbarBgImg}>
+        <View style={toolbarStyles.toolbar}>
+          <ImageBackground
+            style={toolbarStyles.toolbarImage}
+            source={toolbarBgImg}
+          >
             <TouchableOpacity
               onPress={() => {
                 if (this._drawer.open()) {
@@ -123,7 +129,7 @@ class DashBoard extends Component {
                 }
               }}
               style={[
-                styles.addImage,
+                toolbarStyles.addImage,
                 {
                   alignself: "left",
                   marginLeft: 10,
@@ -131,21 +137,21 @@ class DashBoard extends Component {
                 }
               ]}
             >
-              <Image source={drawerMenuImg} style={styles.addImage} />
+              <Image source={drawerMenuImg} style={toolbarStyles.addImage} />
             </TouchableOpacity>
             <View
               style={[
-                styles.addImage,
+               toolbarStyles.addImage,
                 { alignself: "center", justifyContent: "center" }
               ]}
             >
-              <Text source={addImg} style={styles.headerText}>
+              <Text source={addImg} style={toolbarStyles.headerText}>
                 {this.state.selectedItem}
               </Text>
             </View>
             <TouchableOpacity
               style={[
-                styles.addImage,
+                toolbarStyles.addImage,
                 {
                   alignself: "right",
                   marginRight: 10,
@@ -153,12 +159,12 @@ class DashBoard extends Component {
                 }
               ]}
             >
-              <Image source={addImg} style={styles.addImage} />
+              <Image source={addImg} style={toolbarStyles.addImage} />
             </TouchableOpacity>
           </ImageBackground>
         </View>
       </View>
-    );
+    );container
   }
 
   dyanamicScreens() {
@@ -181,11 +187,11 @@ class DashBoard extends Component {
                 keyExtractor={item => item.serialNo + ""}
               />
             ) : (
-              <Text>FlatList</Text>
+              <Text>No Records to show</Text>
             )}
           </View>
         ) : (
-          <Text>FlatList</Text>
+          <Text>FlatList2</Text>
         )}
       </View>
     );
@@ -223,29 +229,6 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44
-  },
-  toolbar: {
-    height: 56,
-    backgroundColor: "#FFFFFFFF"
-  },
-  addImage: {
-    padding: 10,
-    resizeMode: "contain"
-  },
-  addImageView: {
-    flex: 0.33,
-    resizeMode: "contain"
-  },
-  toolbarImage: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  headerText: {
-    fontSize: 25,
-    color: "#FFF",
-    fontWeight: "bold"
   }
 });
 

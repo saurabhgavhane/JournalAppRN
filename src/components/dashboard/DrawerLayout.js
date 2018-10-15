@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 
-import { RECORDS, PROFILE } from "../../utils/constants";
+import { MAIN, RECORDS, PROFILE } from "../../utils/constants";
 
 export default class DrawerLayout extends Component {
   constructor(props) {

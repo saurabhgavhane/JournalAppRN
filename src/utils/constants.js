@@ -13,3 +13,7 @@ export const RECORDS_FETCHED_FAIL = "RECORDS_FETCHED_FAIL";
 //Drawer constants
 export const RECORDS = "Records";
 export const PROFILE = "Profile";
+export const EDIT_RECORDS = "editRecords";
+export const MAIN = "main";
+export const AUTH = "auth";
+export const LOGIN = "login";

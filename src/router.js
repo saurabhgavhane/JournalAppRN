@@ -5,21 +5,33 @@ import Dashboard from "./components/dashboard/Dashboard";
 import EditRecords from "./components/RecordList/EditRecords";
 import DrawerLayout from "./components/dashboard/DrawerLayout";
 
+import {
+  AUTH,
+  LOGIN,
+  PROFILE,
+  RECORDS,
+  MAIN,
+  EDIT_RECORDS
+} from "./utils/constants";
+
 const RouterComponent = () => (
   <Router>
     <Scene key="root" hideNavBar>
-        <Scene key="login" component={Login} initial hideNavBar />
-     
+      <Scene key={AUTH} hideNavBar initial>
+        <Scene key={LOGIN} component={Login} hideNavBar />
+      </Scene>
       {/* <Drawer
         key="main"
         contentComponent={DrawerLayout}
         drawerWidth={250}
         drawerPosition="left"
       > */}
-        <Scene key="records" component={Dashboard} hideNavBar />
-        <Scene key="editRecords" component={EditRecords} hideNavBar />
-        <Scene key="myProfile" component={Login} hideNavBar />
-      {/* </Drawer> */}
+      <Scene key={MAIN}>
+        <Scene key={RECORDS} component={Dashboard} hideNavBar />
+        <Scene key={EDIT_RECORDS} component={EditRecords} hideNavBar />
+        <Scene key={PROFILE} component={Login} hideNavBar />
+        {/* </Drawer> */}
+      </Scene>
     </Scene>
   </Router>
 );
