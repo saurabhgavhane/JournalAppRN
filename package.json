@@ -11,6 +11,7 @@
     "react-native": "0.56.0",
     "react-native-drawer": "^2.5.1",
     "react-native-keyboard-aware-scroll-view": "^0.7.2",
+    "react-native-material-textinput": "^1.1.0",
     "react-native-router-flux": "^4.0.1",
     "react-native-tab-view": "^1.2.0",
     "react-native-toolbar": "^1.0.7",

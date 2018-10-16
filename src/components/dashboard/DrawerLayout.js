@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 
-import { MAIN, RECORDS, PROFILE } from "../../utils/constants";
+import { MAIN, RECORDS, PROFILE, COMPANY } from "../../utils/constants";
 
 export default class DrawerLayout extends Component {
   constructor(props) {
@@ -91,6 +91,10 @@ export default class DrawerLayout extends Component {
     this.props.drawerAction(PROFILE);
     this.props.refer.close();
   }
+  openCompany() {
+    this.props.drawerAction(COMPANY);
+    this.props.refer.close();
+  }
 
   render() {
     const {
@@ -147,7 +151,10 @@ export default class DrawerLayout extends Component {
               <Text style={textStyle}>My Profile</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity underlayColor={"#ddd"}>
+          <TouchableOpacity
+            underlayColor={"#ddd"}
+            onPress={() => this.openCompany()}
+          >
             <View style={itemStyle}>
               <Image
                 source={require("../../images/company.png")}

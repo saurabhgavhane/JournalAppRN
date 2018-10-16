@@ -12,7 +12,6 @@ import {
   ImageBackground,
   FlatList
 } from "react-native";
-import RecordListItem from "./RecordListItem";
 import DrawerLayout from "./DrawerLayout";
 import Drawer from "react-native-drawer";
 
@@ -25,23 +24,25 @@ import addImg from "../.././images/add_white.png";
 import toolbarBgImg from "../.././images/header.png";
 import drawerMenuImg from "../.././images/drawer_menu.png";
 import { toolbarStyles } from "../../utils/styles";
+import MyProfile from "../Profile/MyProfile";
+import RecodList from "../RecordList/RecodList";
 
-import { MAIN, RECORDS, PROFILE, EDIT_RECORDS } from "../../utils/constants";
+import {
+  MAIN,
+  RECORDS,
+  PROFILE,
+  EDIT_RECORDS,
+  COMPANY
+} from "../../utils/constants";
 
 class DashBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: "",
-      recordList: [],
       selectedItem: RECORDS
     };
     // Bind the this context to the handler function
     this.drawerClickHandler = this.drawerClickHandler.bind(this);
-
-    this.recordListItemClickHandler = this.recordListItemClickHandler.bind(
-      this
-    );
   }
 
   // This method will be sent to the child component
@@ -51,43 +52,6 @@ class DashBoard extends Component {
     this.setState({
       selectedItem: selectedScreen
     });
-  }
-
-  recordListItemClickHandler(item) {
-    Actions.editRecords();
-    //ToastAndroid.show("recordListItemClickHandler", ToastAndroid.SHORT);
-    //ToastAndroid.show(item.serialNo, ToastAndroid.SHORT);
-  }
-
-  componentWillMount() {
-    console.log("componentWillMount");
-    AsyncStorage.getItem("Token")
-      .then(value => {
-        if (value) {
-          console.log("value", value);
-          this.setState({ token: value });
-          this.makeRecordFetchRequest();
-        }
-      })
-      .done();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    //console.log("Data flatlist", JSON.stringify(nextProps.records));
-    //console.log("Data flatlist s", JSON.stringify(nextProps.records.records.s));
-
-    if (nextProps.records != "" && nextProps.records != undefined) {
-      if (nextProps.records.records.s) {
-        // console.log(
-        //   "Data flatlist",
-        //   JSON.stringify(nextProps.records.records.d)
-        // );
-
-        this.setState({
-          recordList: nextProps.records.records.d
-        });
-      }
-    }
   }
 
   toggleDrawer() {
@@ -141,7 +105,7 @@ class DashBoard extends Component {
             </TouchableOpacity>
             <View
               style={[
-               toolbarStyles.addImage,
+                toolbarStyles.addImage,
                 { alignself: "center", justifyContent: "center" }
               ]}
             >
@@ -164,37 +128,19 @@ class DashBoard extends Component {
           </ImageBackground>
         </View>
       </View>
-    );container
+    );
+    container;
   }
 
   dyanamicScreens() {
-    return (
-      <View>
-        {this.state.selectedItem == RECORDS ? (
-          <View style={styles.container}>
-            {this.state.recordList.length > 0 ? (
-              <FlatList
-                data={this.state.recordList}
-                renderItem={({ item }) => (
-                  <RecordListItem
-                    onPressItem={this.recordListItemClickHandler}
-                    serialNo={"Serial No: " + item.serialNo}
-                    signerName={"Signer Name: " + item.signer[0].firstName}
-                    createdDate={"Created Date: " + item.createdAt}
-                    modifiedDate={"Modified Date: " + item.updatedAt}
-                  />
-                )}
-                keyExtractor={item => item.serialNo + ""}
-              />
-            ) : (
-              <Text>No Records to show</Text>
-            )}
-          </View>
-        ) : (
-          <Text>FlatList2</Text>
-        )}
-      </View>
-    );
+    if (this.state.selectedItem == RECORDS) return <RecodList />;
+    else if (this.state.selectedItem == PROFILE) return <MyProfile />;
+    else if (this.state.selectedItem == COMPANY)
+      return (
+        <View>
+          <Text>Tesnlksl</Text>
+        </View>
+      );
   }
 
   render() {
@@ -232,13 +178,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapsStateToProps = state => {
-  return {
-    records: state.records
-  };
-};
-
-export default connect(
-  mapsStateToProps,
-  { fetchRecords }
-)(DashBoard);
+export default DashBoard;

@@ -17,3 +17,7 @@ export const EDIT_RECORDS = "editRecords";
 export const MAIN = "main";
 export const AUTH = "auth";
 export const LOGIN = "login";
+export const COMPANY = "company";
+
+//Color constants
+export const APP_COLOR = "#4682b4";

@@ -159,30 +159,32 @@ const styles = StyleSheet.create({
     padding: 16
   },
   indicatorContainer: {
-    backgroundColor: 0x00000020,
-    height: 50
+    backgroundColor: "white",
+    height: 60
   },
   indicatorText: {
     fontSize: 20,
     fontWeight: "bold",
-    color: 0xffffff99
+    padding: 5,
+    color: "white"
   },
   indicatorSelectedText: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "black"
+    color: "black",
+    padding: 5
   },
   selectedBorderStyle: {
     height: 3,
-    backgroundColor: "white"
+    backgroundColor: "#4682b4"
   },
   statusBar: {
     height: 24,
-    backgroundColor: 0x00000044
+    backgroundColor: "blue"
   },
   toolbarContainer: {
     height: 50,
-    backgroundColor: 0x00000020,
+    backgroundColor: "white",
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 16
@@ -203,6 +205,7 @@ const styles = StyleSheet.create({
   },
   selectedIndicatorStyle: {
     padding: 10,
+    backgroundColor: "white",
     width: windowWidth / 2
   }
 });
