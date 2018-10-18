@@ -74,6 +74,10 @@ class RecordList extends Component {
       }
     }
   }
+  makeRecordFetchRequest = () => {
+    console.log("Record", this.state.token);
+    this.props.fetchRecords(this.state.token);
+  };
 
   render() {
     return (

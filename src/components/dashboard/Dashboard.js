@@ -64,10 +64,7 @@ class DashBoard extends Component {
     }
   }
 
-  makeRecordFetchRequest = () => {
-    console.log("Record", this.state.token);
-    this.props.fetchRecords(this.state.token);
-  };
+ 
 
   closeControlPanel = () => {
     this._drawer.close();

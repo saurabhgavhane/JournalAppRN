@@ -10,6 +10,11 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const RECORDS_FETCHED_SUCCESSS = "RECORDS_FETCHED_SUCCESSS";
 export const RECORDS_FETCHED_FAIL = "RECORDS_FETCHED_FAIL";
 
+//profile general constants
+export const PROFILE_FETCHING = "PROFILE_FETCHING";
+export const PROFILE_FETCHED_SUCCESSS = "PROFILE_FETCHED_SUCCESSS";
+export const PROFILE_FETCHED_FAIL = "PROFILE_FETCHED_FAIL";
+
 //Drawer constants
 export const RECORDS = "Records";
 export const PROFILE = "Profile";
