@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingTop: 0,
     paddingBottom: 0,
-    fontWeight: "bold"
+    
   },
   forgetPassText: {
     color: "white",

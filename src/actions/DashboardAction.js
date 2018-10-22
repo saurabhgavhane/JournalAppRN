@@ -25,6 +25,7 @@ export const fetchRecords = token => {
       .then(response => response.json())
       .then(response => {
         console.log("records response", response);
+        console.log("records response json", JSON.stringify(response));
         dispatch({ type: RECORDS_FETCHED_SUCCESSS, payload: response });
       })
       .catch(error => {

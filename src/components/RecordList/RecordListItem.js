@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 
-export default class RecordListItem extends React.PureComponent {
+export default class RecordListItem extends Component {
   onItemPress() {
-    this.props.onPressItem(this.props);
+    this.props.onPressItem(this.props.item);
   }
 
   render() {

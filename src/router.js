@@ -18,16 +18,16 @@ import {
 const RouterComponent = () => (
   <Router>
     <Scene key="root" hideNavBar>
-      {/* <Scene key={AUTH} hideNavBar>
+      <Scene key={AUTH} hideNavBar>
         <Scene key={LOGIN} component={Login} hideNavBar />
-      </Scene> */}
+      </Scene>
       {/* <Drawer
         key="main"
         contentComponent={DrawerLayout}
         drawerWidth={250}
         drawerPosition="left"
       > */}
-      <Scene key={MAIN} initial>
+      <Scene key={MAIN}>
         <Scene key={RECORDS} component={Dashboard} hideNavBar />
         <Scene key={EDIT_RECORDS} component={EditRecords} hideNavBar />
         <Scene key={PROFILE} component={MyProfile} hideNavBar />

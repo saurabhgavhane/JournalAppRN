@@ -22,6 +22,8 @@ import {
   ViewPager
 } from "rn-viewpager";
 
+import SignerDetails from "./SignerDetails";
+
 import addImg from "../.././images/add_white.png";
 import toolbarBgImg from "../.././images/header.png";
 import backImg from "../.././images/back.png";
@@ -99,13 +101,13 @@ class EditRecords extends Component {
     return (
       <PagerTitleIndicator
         style={styles.indicatorContainer}
-        trackScroll={true}
+        trackScroll={false}
         itemTextStyle={styles.indicatorText}
         itemStyle={styles.indicatorStyle}
         selectedItemStyle={styles.selectedIndicatorStyle}
         selectedItemTextStyle={styles.indicatorSelectedText}
         selectedBorderStyle={styles.selectedBorderStyle}
-        titles={["Signer", "Jurats"]}
+        titles={["Signer Details", "Jurats Details"]}
       />
     );
   }
@@ -115,13 +117,27 @@ class EditRecords extends Component {
       <View style={{ flex: 1 }}>
         <Animated.View style={{ flex: 1, backgroundColor: this._bgColor }}>
           <IndicatorViewPager
-            style={{ flex: 1, flexDirection: "column-reverse" }}
+            style={{
+              flex: 1,
+              marginLeft: 5,
+              marginRight: 5,
+              flexDirection: "column-reverse"
+            }}
+            horizontalScroll={false}
             indicator={this._renderTitleIndicator()}
           >
-            <View style={{ backgroundColor: "cadetblue" }}>
-              <Text>page one</Text>
+            <View style={{ backgroundColor: "white" }}>
+              {/* {console.log(
+                "this.props.item.signer",
+                JSON.stringify(this.props.item)
+              )} */}
+              {ToastAndroid.show(
+                this.props.item.signer[0].city,
+                ToastAndroid.LONG
+              )}
+              <SignerDetails signer={this.props.item.signer[0]} />
             </View>
-            <View style={{ backgroundColor: "cornflowerblue" }}>
+            <View style={{ backgroundColor: "white" }}>
               <Text>page two</Text>
             </View>
           </IndicatorViewPager>
@@ -159,19 +175,18 @@ const styles = StyleSheet.create({
     padding: 16
   },
   indicatorContainer: {
-    backgroundColor: "white",
     height: 60
   },
   indicatorText: {
     fontSize: 20,
     fontWeight: "bold",
     padding: 5,
-    color: "white"
+    color: "black"
   },
   indicatorSelectedText: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "black",
+    color: "white",
     padding: 5
   },
   selectedBorderStyle: {
@@ -180,7 +195,7 @@ const styles = StyleSheet.create({
   },
   statusBar: {
     height: 24,
-    backgroundColor: "blue"
+    backgroundColor: "#00FFFFFF"
   },
   toolbarContainer: {
     height: 50,
@@ -201,11 +216,11 @@ const styles = StyleSheet.create({
   indicatorStyle: {
     padding: 10,
     width: windowWidth / 2,
-    backgroundColor: "#4682b4"
+    backgroundColor: "white"
   },
   selectedIndicatorStyle: {
     padding: 10,
-    backgroundColor: "white",
+    backgroundColor: "#4682b4",
     width: windowWidth / 2
   }
 });

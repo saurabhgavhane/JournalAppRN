@@ -39,7 +39,7 @@ class RecordList extends Component {
   }
 
   recordListItemClickHandler(item) {
-    Actions.editRecords();
+    Actions.editRecords({ item });
     //ToastAndroid.show("recordListItemClickHandler", ToastAndroid.SHORT);
     //ToastAndroid.show(item.serialNo, ToastAndroid.SHORT);
   }
@@ -58,11 +58,16 @@ class RecordList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    //console.log("Data flatlist", JSON.stringify(nextProps.records));
-    //console.log("Data flatlist s", JSON.stringify(nextProps.records.records.s));
+    ///console.log("Data flatlist", JSON.stringify(nextProps.records));
+    console.log("Data flatlist s", JSON.stringify(nextProps.records.records.s));
 
     if (nextProps.records != "" && nextProps.records != undefined) {
-      if (nextProps.records.records.s) {
+      console.log(
+        "Data flatlist sssssss",
+        JSON.stringify(nextProps.records.records.s)
+      );
+
+      if (JSON.stringify(nextProps.records.records.s)) {
         // console.log(
         //   "Data flatlist",
         //   JSON.stringify(nextProps.records.records.d)
@@ -82,12 +87,12 @@ class RecordList extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Tsting</Text>
         {this.state.recordList.length > 0 ? (
           <FlatList
             data={this.state.recordList}
             renderItem={({ item }) => (
               <RecordListItem
+                item={item}
                 onPressItem={this.recordListItemClickHandler}
                 serialNo={"Serial No: " + item.serialNo}
                 signerName={"Signer Name: " + item.signer[0].firstName}
@@ -115,6 +120,7 @@ const styles = StyleSheet.create({
 });
 
 const mapsStateToProps = state => {
+  console.log(JSON.stringify(state.records));
   return {
     records: state.records
   };
