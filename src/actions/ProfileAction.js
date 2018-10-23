@@ -5,6 +5,7 @@ import {
   PROFILE_FETCHED_FAIL
 } from "../utils/constants";
 import { AsyncStorage } from "react-native";
+import { BASE_URL } from "../utils/constants";
 
 export const fetchProfile = token => {
   return dispatch => {
@@ -12,7 +13,7 @@ export const fetchProfile = token => {
     console.log("fetchRecords");
     console.log("token", token);
 
-    fetch("http://52.34.207.5:5073/m/fetch/clerk/record", {
+    fetch(BASE_URL + "/m/fetch/clerk/record", {
       method: "POST",
       headers: {
         Accept: "application/json",

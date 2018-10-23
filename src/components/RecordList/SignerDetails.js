@@ -10,6 +10,7 @@ import {
   ToastAndroid,
   AsyncStorage,
   ToolbarAndroid,
+  Picker,
   ImageBackground,
   FlatList
 } from "react-native";
@@ -25,6 +26,8 @@ import locationImg from "../../images/location.png";
 import emaildImg from "../../images/emaild.png";
 import phoneImg from "../../images/phone_green.png";
 
+import { BASE_URL } from "../../utils/constants";
+
 class SignerDetails extends Component {
   constructor(props) {
     super(props);
@@ -39,13 +42,13 @@ class SignerDetails extends Component {
       office: "",
       home: "",
       email: signer.email,
-      address1:signer.address_1,
+      address1: signer.address_1,
       address2: signer.address_2,
       city: signer.city,
-      state:signer.state,
-      zipcode:signer.zip,
-      idType: "",
-      idNumber: "",
+      state: signer.state,
+      zipcode: signer.zip,
+      idType: signer.idType,
+      idNumber: signer.idNo,
       createdRecords: "",
       companyName: "",
       planName: "",
@@ -87,6 +90,7 @@ class SignerDetails extends Component {
   }
 
   onStateChange(state) {
+    console.log("state", state);
     this.setState({ state: state.toUpperCase() });
   }
 
@@ -94,7 +98,9 @@ class SignerDetails extends Component {
     this.setState({ zipcode });
   }
 
-  onIDTypeChange(idType) {
+  onIDTypeValueChange(idType) {
+    console.log("idType", idType);
+    //if (idType != "default")
     this.setState({ idType });
   }
 
@@ -110,9 +116,30 @@ class SignerDetails extends Component {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 5 }}
         >
+          <Text
+            style={[
+              styles.headerTxtStyle,
+              {
+                paddingTop: 0,
+                paddingBottom: 0
+              }
+            ]}
+          >
+            Record No: {this.props.serialNo}
+          </Text>
+          <Text style={styles.txtStyle}>
+            Created Date: {this.props.serialNo}
+          </Text>
+          <Text style={styles.txtStyle}>
+            Modified Date: {this.props.modifiedDate}
+          </Text>
           <View>
+            {console.log("URL", BASE_URL + this.props.createdDate)}
             <Text style={styles.headerTxtStyle}>Uploaded Images</Text>
-            <Image source={addImg} style={styles.signerImageStyle} />
+            <Image
+              source={{ uri: BASE_URL + this.props.signer.docPath }}
+              style={styles.signerImageStyle}
+            />
           </View>
           <Text style={styles.headerTxtStyle}>Signer Details </Text>
 
@@ -148,7 +175,6 @@ class SignerDetails extends Component {
             onChangeText={this.onLastnameChange.bind(this)}
           />
 
-         
           <TextInput
             inLineImg={phoneImg}
             placeholder="Phone"
@@ -225,23 +251,38 @@ class SignerDetails extends Component {
             label="ZipCode"
             returnKeyType={"next"}
             autoCorrect={false}
+            keyboardType={"number-pad"}
             value={this.state.zipcode}
             blurOnSubmit={false}
             onChangeText={this.onZipCodeChange.bind(this)}
           />
           <Text style={styles.headerTxtStyle}>ID Details </Text>
 
-          <TextInput
-            inLineImg={locationImg}
-            placeholder="ID Type"
-            label="ID Type"
-            returnKeyType={"next"}
-            autoCorrect={false}
-            value={this.state.idType}
-            blurOnSubmit={false}
-            onChangeText={this.onIDTypeChange.bind(this)}
-          />
-
+          <View style={styles.pickerContainer}>
+            <View style={styles.imgViewStyle}>
+              <Image style={styles.inlineImg} source={locationImg} />
+            </View>
+            <View style={styles.pickerViewStyle}>
+              <Picker
+                prompt="Options"
+                selectedValue={this.state.idType}
+                onValueChange={itemValue => {
+                  if (itemValue != "default") {
+                    this.setState({ itemValue });
+                    this.onIDTypeValueChange(itemValue);
+                  }
+                }}
+                mode="dialog"
+                textStyle={styles.pickerText}
+              >
+                <Picker.Item label="Please select ID Type" value="default" />
+                <Picker.Item label="Driving License" value="Driving License" />
+                <Picker.Item label="Passport" value="Passport" />
+                <Picker.Item label="State ID" value="State ID" />
+                <Picker.Item label="Military ID" value="Military ID" />
+              </Picker>
+            </View>
+          </View>
           <TextInput
             inLineImg={locationImg}
             placeholder="ID Number"
@@ -270,6 +311,7 @@ const styles = StyleSheet.create({
   signerImageStyle: {
     backgroundColor: "black",
     padding: 10,
+    resizeMode: "cover",
     width: DEVICE_WIDTH - 15,
     height: DEVICE_WIDTH / 2
   },
@@ -280,6 +322,31 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingTop: 10,
     paddingBottom: 10
+  },
+  imgViewStyle: {
+    flex: 0.1,
+    marginTop: 10,
+    marginLeft: 5,
+    marginRight: 5
+  },
+  inlineImg: {
+    resizeMode: "contain",
+    width: 30,
+    height: 30
+  },
+  pickerContainer: {
+    marginTop: 8,
+    flexDirection: "row"
+  },
+  pickerViewStyle: {
+    flex: 0.9,
+    marginLeft: 5,
+    marginRight: 5
+  },
+  txtStyle: {
+    color: "black",
+    backgroundColor: "transparent",
+    fontSize: 20
   }
 });
 

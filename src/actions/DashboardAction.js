@@ -3,13 +3,14 @@ import {
   RECORDS_FETCHED_SUCCESSS
 } from "../utils/constants";
 import { AsyncStorage } from "react-native";
+import { BASE_URL } from "../utils/constants";
 
 export const fetchRecords = token => {
   return dispatch => {
     //dispatch({ type: LOGIN_SUCCESSS });
     console.log("fetchRecords");
     console.log("token", token);
-    fetch("http://52.34.207.5:5073/m/fetch/clerk/record", {
+    fetch(BASE_URL + "m/fetch/clerk/record", {
       method: "POST",
       headers: {
         Accept: "application/json",

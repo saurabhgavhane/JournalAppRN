@@ -3,7 +3,12 @@ import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 
 export default class RecordListItem extends Component {
   onItemPress() {
-    this.props.onPressItem(this.props.item);
+    this.props.onPressItem(
+      this.props.item,
+      this.props.createdDate,
+      this.props.modifiedDate,
+      this.props.serialNo
+    );
   }
 
   render() {

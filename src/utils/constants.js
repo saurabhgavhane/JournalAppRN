@@ -23,6 +23,11 @@ export const MAIN = "main";
 export const AUTH = "auth";
 export const LOGIN = "login";
 export const COMPANY = "company";
+export const SPLASH = "splash";
+export const SPLASH_SCREEN = "splash_screen";
 
 //Color constants
 export const APP_COLOR = "#4682b4";
+
+//API BASE URL
+export const BASE_URL = "http://52.34.207.5:5073/";

@@ -38,8 +38,8 @@ class RecordList extends Component {
     );
   }
 
-  recordListItemClickHandler(item) {
-    Actions.editRecords({ item });
+  recordListItemClickHandler(item,createdDate, modifiedDate, serialNo ) {
+    Actions.editRecords({ item, createdDate, modifiedDate, serialNo });
     //ToastAndroid.show("recordListItemClickHandler", ToastAndroid.SHORT);
     //ToastAndroid.show(item.serialNo, ToastAndroid.SHORT);
   }

@@ -53,7 +53,9 @@ class Login extends Component {
   renderError() {
     if (this.props.error) {
       return (
-        <View style={{ backgroundColor: "white" }}>
+        <View
+          style={{ marginLeft: 25, marginRight: 25, backgroundColor: "white" }}
+        >
           <Text style={styles.errorTextStyle}>{this.props.error}</Text>
         </View>
       );
@@ -191,8 +193,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     fontSize: 20,
     paddingTop: 0,
-    paddingBottom: 0,
-    
+    paddingBottom: 0
   },
   forgetPassText: {
     color: "white",
